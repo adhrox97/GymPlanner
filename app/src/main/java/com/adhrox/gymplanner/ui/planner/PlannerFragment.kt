@@ -20,6 +20,21 @@ class PlannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUI()
+
+    }
+
+    private fun initUI() {
+        initList()
+        initUIState()
+    }
+
+    private fun initList() {
+
+    }
+
+    private fun initUIState() {
+
     }
 
     override fun onCreateView(
