@@ -8,7 +8,11 @@ import com.adhrox.gymplanner.domain.model.DayInfo
 class PlannerDayViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val binding = ItemDayBinding.bind(view)
 
-    fun render(dayInfo: DayInfo){
+    fun render(dayInfo: DayInfo, onItemSelected: (DayInfo) -> Unit){
+
+        val context = binding.tvDay.context
+
+        binding.tvDay.text = context.getString(dayInfo.name).substring(0,2).uppercase()
 
     }
 }

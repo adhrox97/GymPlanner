@@ -48,6 +48,7 @@ dependencies {
     val nav_version = "2.7.1"
     val daggerHilt_version = "2.48"
     val retrofit_version = "2.9.0"
+    val room_version = "2.5.0"
 
     //NavComponent
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -61,6 +62,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
     implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
+
+    //Room
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="90dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/green"
+    app:cardCornerRadius="16dp">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/red"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="HOLAAAAAAAAAAA"
+                />
+
+            <TextView
+                android:id="@+id/tvEjercicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="TODO BIEN?"/>
+
+            <TextView
+                android:id="@+id/tvDia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="TODO BIEN?"/>
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

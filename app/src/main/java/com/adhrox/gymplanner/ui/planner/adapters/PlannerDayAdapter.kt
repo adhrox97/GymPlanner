@@ -6,8 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.domain.model.DayInfo
 
-class PlannerDayAdapter(private var dayList: List<DayInfo> = emptyList()) :
+class PlannerDayAdapter(
+    private var dayList: List<DayInfo> = emptyList(),
+    private val onItemSelected: (DayInfo) -> Unit
+) :
     RecyclerView.Adapter<PlannerDayViewHolder>() {
+
+    fun updateList(dayList: List<DayInfo>){
+        this.dayList = dayList
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlannerDayViewHolder {
         return PlannerDayViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_day, parent, false)
@@ -17,6 +25,6 @@ class PlannerDayAdapter(private var dayList: List<DayInfo> = emptyList()) :
     override fun getItemCount() = dayList.size
 
     override fun onBindViewHolder(holder: PlannerDayViewHolder, position: Int) {
-        holder.render(dayList[position])
+        holder.render(dayList[position], onItemSelected)
     }
 }
