@@ -10,7 +10,6 @@ class PlanViewHolder(view: View): RecyclerView.ViewHolder(view){
     private val binding = ItemPlanBinding.bind(view)
 
     fun render(plan: Plan){
-        binding.tvId.text = plan.id.toString()
         binding.tvEjercicio.text = plan.ejercicio
         binding.tvDia.text = plan.dia.name
     }

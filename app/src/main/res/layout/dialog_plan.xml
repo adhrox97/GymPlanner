@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/red">
+
+    <EditText
+        android:id="@+id/etExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:hint="Escribe tu ejercicio"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
+
+    <Spinner
+        android:id="@+id/spinnerDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
+
+
+    <Button
+        android:id="@+id/btnAddExercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="@string/AgregarEjercicio"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

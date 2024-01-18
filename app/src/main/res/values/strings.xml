@@ -8,4 +8,15 @@
     <string name="Viernes">Viernes</string>
     <string name="Sabado">Sabado</string>
     <string name="Domingo">Domingo</string>
+    <string name="AgregarEjercicio">Agregar ejercicio</string>
+    <string name="Dia">Dia</string>
+    <string-array name="dias">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+    </string-array>
 </resources>

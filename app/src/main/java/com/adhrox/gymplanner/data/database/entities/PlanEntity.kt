@@ -14,4 +14,4 @@ data class PlanEntity(
     @ColumnInfo(name = "dia") val dia: DayModel
 )
 
-fun Plan.toDataBase()= PlanEntity(id = id, ejercicio = ejercicio, dia = dia)
+fun Plan.toDataBase()= PlanEntity(ejercicio = ejercicio, dia = dia)
