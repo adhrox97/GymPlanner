@@ -14,5 +14,7 @@ class PlannerDayViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         binding.tvDay.text = context.getString(dayInfo.name).substring(0,2).uppercase()
 
+        binding.root.setOnClickListener { onItemSelected(dayInfo) }
+
     }
 }

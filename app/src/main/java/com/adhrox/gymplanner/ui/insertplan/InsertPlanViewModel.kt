@@ -17,9 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class InsertPlanViewModel @Inject constructor(private val insertPlanUseCase: InsertPlanUseCase): ViewModel() {
 
-    fun insertPlan(exercise: String, day: DayModel){
+    fun insertPlan(exercise: String, day: DayModel, strRoutineInfo: List<String>){
         viewModelScope.launch {
-            withContext(Dispatchers.IO){ insertPlanUseCase.insertPlan(exercise, day) }
+            withContext(Dispatchers.IO){ insertPlanUseCase.insertPlan(exercise, day, strRoutineInfo) }
         }
 
     }

@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_plannerFragment_to_insertPlanActivity"
             app:destination="@id/insertPlanActivity" />
+        <action
+            android:id="@+id/action_plannerFragment_to_planDetailActivity"
+            app:destination="@id/planDetailActivity" />
     </fragment>
     <activity
         android:id="@+id/insertPlanActivity"
         android:name="com.adhrox.gymplanner.ui.insertplan.InsertPlanActivity"
         android:label="activity_insert_plan"
         tools:layout="@layout/activity_insert_plan" />
+    <activity
+        android:id="@+id/planDetailActivity"
+        android:name="com.adhrox.gymplanner.ui.plandetail.PlanDetailActivity"
+        android:label="activity_plan_detail"
+        tools:layout="@layout/activity_plan_detail" >
+        <argument
+            android:name="idPlan"
+            app:argType="integer" />
+    </activity>
 </navigation>

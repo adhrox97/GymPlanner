@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.domain.model.Plan
 
-class PlanAdapter(private var planList: List<Plan> = emptyList()): RecyclerView.Adapter<PlanViewHolder>() {
+class PlanAdapter(private var planList: List<Plan> = emptyList(), private val onItemPlanSelected: (Plan) -> Unit): RecyclerView.Adapter<PlanViewHolder>() {
 
     fun updateList(planList: List<Plan>) {
         this.planList = planList
@@ -19,6 +19,6 @@ class PlanAdapter(private var planList: List<Plan> = emptyList()): RecyclerView.
     override fun getItemCount() = planList.size
 
     override fun onBindViewHolder(holder: PlanViewHolder, position: Int) {
-        holder.render(planList[position])
+        holder.render(planList[position], onItemPlanSelected)
     }
 }

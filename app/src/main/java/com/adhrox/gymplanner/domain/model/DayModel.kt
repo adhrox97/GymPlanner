@@ -1,11 +1,11 @@
 package com.adhrox.gymplanner.domain.model
 
-enum class DayModel {
-    Lunes,
-    Martes,
-    Miercoles,
-    Jueves,
-    Viernes,
-    Sabado,
-    Domingo
+enum class DayModel() {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
 }

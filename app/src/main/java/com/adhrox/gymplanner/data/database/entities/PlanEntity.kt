@@ -11,7 +11,11 @@ data class PlanEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "ejercicio") val ejercicio: String,
-    @ColumnInfo(name = "dia") val dia: DayModel
+    @ColumnInfo(name = "dia") val dia: DayModel,
+    @ColumnInfo(name = "duration") val duration: Float,
+    @ColumnInfo(name = "sets") val sets: Int,
+    @ColumnInfo(name = "reps") val reps: Int,
+    @ColumnInfo(name = "rest") val rest: Int
 )
 
-fun Plan.toDataBase()= PlanEntity(ejercicio = ejercicio, dia = dia)
+fun Plan.toDataBase()= PlanEntity(ejercicio = ejercicio, dia = dia, duration = duration, sets = sets, reps = reps, rest = rest)

@@ -7,10 +7,10 @@
     tools:context=".ui.insertplan.InsertPlanActivity">
 
     <ImageView
-        android:id="@+id/ivClose"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_back"
         android:padding="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
-        android:text="@string/AgregarEjercicio"
+        android:text="@string/add_exercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/etExercise"/>
@@ -31,15 +31,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:hint="Escribe tu ejercicio"
+        android:hint="@string/hint_write_exercise"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:paddingHorizontal="72dp"
         android:textSize="24sp"
         android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/ivClose"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
@@ -90,12 +92,50 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/llcDay"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration"/>
+        <EditText
+            android:id="@+id/etDuration"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sets"/>
+        <EditText
+            android:id="@+id/etSets"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reps"/>
+        <EditText
+            android:id="@+id/etReps"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rest"/>
+        <EditText
+            android:id="@+id/etRest"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

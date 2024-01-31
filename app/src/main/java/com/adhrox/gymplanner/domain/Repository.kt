@@ -1,6 +1,7 @@
 package com.adhrox.gymplanner.domain
 
 import com.adhrox.gymplanner.data.database.entities.PlanEntity
+import com.adhrox.gymplanner.domain.model.DayModel
 import com.adhrox.gymplanner.domain.model.Plan
 
 interface Repository {
@@ -11,4 +12,11 @@ interface Repository {
 
     suspend fun insertPlan(plan: PlanEntity)
 
+    suspend fun getDataByDay(day: DayModel): List<Plan>
+
+    suspend fun getDataById(id: Int): Plan?
+
+    suspend fun deleteDataById(id: Int)
+
+    suspend fun deleteAllContentTable()
 }

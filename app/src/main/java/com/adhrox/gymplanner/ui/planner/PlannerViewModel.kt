@@ -24,14 +24,25 @@ class PlannerViewModel @Inject constructor(daysProvider: DaysProvider, private v
     private var _exercises = MutableStateFlow<List<Plan>>(emptyList())
     private val exercises: StateFlow<List<Plan>> = _exercises
 
+    private var _exercisesDay = MutableStateFlow<List<Plan>>(emptyList())
+    val exercisesDay: StateFlow<List<Plan>> = _exercisesDay
+
     init {
         _days.value = daysProvider.getDays()
     }
+
     fun getAllPlans(): StateFlow<List<Plan>>{
         viewModelScope.launch {
-            val plans = withContext(Dispatchers.IO){getPlansUseCase()}
+            val plans = withContext(Dispatchers.IO){getPlansUseCase.getAllPlan()}
             _exercises.value = plans
         }
         return exercises
+    }
+    fun getDataByDay(day: DayModel): StateFlow<List<Plan>>{
+        viewModelScope.launch {
+            val plans = withContext(Dispatchers.IO){getPlansUseCase.getDataByDay(day)}
+            _exercisesDay.value = plans
+        }
+        return exercisesDay
     }
 }

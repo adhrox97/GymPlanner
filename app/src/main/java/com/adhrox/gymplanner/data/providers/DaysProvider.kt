@@ -7,13 +7,13 @@ import javax.inject.Inject
 class DaysProvider @Inject constructor(){
     fun getDays(): List<DayInfo> {
         return listOf(
-            Lunes,
-            Martes,
-            Miercoles,
-            Jueves,
-            Viernes,
-            Sabado,
-            Domingo
+            Monday,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
         )
     }
 }

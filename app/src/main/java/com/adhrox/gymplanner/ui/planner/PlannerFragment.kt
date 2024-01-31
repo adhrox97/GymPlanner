@@ -29,6 +29,8 @@ import com.adhrox.gymplanner.ui.planner.adapters.PlannerDayAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class PlannerFragment : Fragment() {
@@ -36,14 +38,20 @@ class PlannerFragment : Fragment() {
     private val plannerViewModel by viewModels<PlannerViewModel>()
     private lateinit var plannerDayAdapter: PlannerDayAdapter
     private lateinit var planAdapter: PlanAdapter
+    private lateinit var currentlySelectedDay: DayModel
 
     private var _binding: FragmentPlannerBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        plannerViewModel.getDataByDay(getDay())
         initUI()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        plannerViewModel.getDataByDay(currentlySelectedDay)
     }
 
     private fun initUI() {
@@ -56,26 +64,32 @@ class PlannerFragment : Fragment() {
         binding.fabAddPlan.setOnClickListener { navigateToInsertActivity() }
     }
 
-    private fun navigateToInsertActivity() {
-
-        findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToInsertPlanActivity())
-
-    }
-
     private fun initList() {
-        plannerDayAdapter = PlannerDayAdapter(onItemSelected = {})
+        plannerDayAdapter = PlannerDayAdapter() {onItemSelected(it)}
         binding.rvDay.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = plannerDayAdapter
         }
 
-        planAdapter = PlanAdapter()
+        planAdapter = PlanAdapter() {onItemPlanSelected(it)}
         binding.rvPlan.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = planAdapter
         }
 
     }
+
+    private fun onItemPlanSelected(planSelected: Plan) {
+        navigateToPlanDetail(planSelected.id)
+    }
+
+    private fun onItemSelected(daySelected: DayInfo) {
+        val dayName = daySelected::class.java.simpleName
+        plannerViewModel.getDataByDay(getDayModelByString(dayName))
+
+    }
+
+
 
     private fun initUIState() {
         lifecycleScope.launch {
@@ -88,11 +102,34 @@ class PlannerFragment : Fragment() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                plannerViewModel.getAllPlans().collect(){
+                plannerViewModel.exercisesDay.collect(){
                     planAdapter.updateList(it)
                 }
             }
         }
+    }
+
+    private fun getDay(): DayModel{
+        val calendar = Calendar.getInstance()
+        val dayCalendar = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+        return getDayModelByString(dayCalendar!!)
+    }
+
+    private fun getDayModelByString(day: String): DayModel{
+        currentlySelectedDay = DayModel.valueOf(day)
+        return currentlySelectedDay
+    }
+
+    private fun navigateToInsertActivity() {
+
+        findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToInsertPlanActivity())
+
+    }
+
+    private fun navigateToPlanDetail(id: Int) {
+
+        findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToPlanDetailActivity(id))
+
     }
 
     override fun onCreateView(

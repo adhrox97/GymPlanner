@@ -2,6 +2,7 @@ package com.adhrox.gymplanner.ui.insertplan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,6 +12,9 @@ import com.adhrox.gymplanner.databinding.ActivityInsertPlanBinding
 import com.adhrox.gymplanner.domain.model.DayModel
 import com.adhrox.gymplanner.ui.planner.PlannerViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
+import java.util.Locale
+import kotlin.reflect.typeOf
 
 @AndroidEntryPoint
 class InsertPlanActivity : AppCompatActivity() {
@@ -32,7 +36,7 @@ class InsertPlanActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.ivClose.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        binding.ivBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.btnAddExercise.setOnClickListener { addExercise() }
     }
 
@@ -44,6 +48,8 @@ class InsertPlanActivity : AppCompatActivity() {
     private fun addExercise() {
         val exercise = binding.etExercise.text.toString()
         val day = binding.spinnerDays.selectedItem as DayModel
+        val routineInfo = listOf(binding.etDuration, binding.etSets, binding.etReps, binding.etRest).map { it.text.toString() }
+
 
         if(exercise.isNotEmpty()){
 
@@ -53,7 +59,7 @@ class InsertPlanActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
 
-            insertPlanViewModel.insertPlan(exercise, day)
+            insertPlanViewModel.insertPlan(exercise, day, routineInfo)
 
             onBackPressedDispatcher.onBackPressed()
 
@@ -63,6 +69,7 @@ class InsertPlanActivity : AppCompatActivity() {
                 "Escriba un ejercicio",
                 Toast.LENGTH_LONG
             ).show()
+
         }
     }
 }
