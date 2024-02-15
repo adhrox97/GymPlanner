@@ -4,7 +4,8 @@
     android:layout_height="90dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardBackgroundColor="@color/green"
+    app:cardBackgroundColor="@color/river_bed"
+    android:elevation="200dp"
     app:cardCornerRadius="16dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp">
@@ -29,12 +30,14 @@
                 android:id="@+id/tvEjercicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 tools:text="TODO BIEN?"/>
 
             <TextView
                 android:id="@+id/tvDia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 tools:text="TODO BIEN?"/>
 
         </LinearLayout>

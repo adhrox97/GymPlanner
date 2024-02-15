@@ -1,7 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.GymPlanner" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="selectedColor">@color/mystic</item>
+        <item name="unselectedColor">@color/bali_hai</item>
+        <item name="android:tint">@color/white</item>
+        <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="primaryBackground">
+        <item name="android:background">@color/pickled_bluewood</item>
+    </style>
+
+    <style name="secondaryBackground">
+        <item name="android:background">@color/big_stone</item>
+    </style>
+
+    <style name="cardView">
+        <item name="cardBackgroundColor">@color/pickled_bluewood</item>
+        <item name="cardElevation">80dp</item>
+    </style>
+
 </resources>

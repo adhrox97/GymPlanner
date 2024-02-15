@@ -11,11 +11,19 @@
     <string name="add_exercise">Agregar ejercicio</string>
     <string name="delete_all_plans">Eliminar todo</string>
     <string name="hint_write_exercise">Escribe tu ejercicio</string>
+    <string name="save">Guardar</string>
+    <string name="start">Iniciar</string>
+    <string name="reset">Reiniciar</string>
     <string name="Dia">Dia</string>
     <string name="duration">Duracion</string>
     <string name="sets">Series</string>
     <string name="reps">Repeticiones</string>
     <string name="rest">Descanso</string>
+    <string name="weight">Peso</string>
+    <string name="alert">Esta seguro de realizar esta acción?</string>
+    <string name="confirmation">Confirmación</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
     <string-array name="dias">
         <item>Lunes</item>
         <item>Martes</item>

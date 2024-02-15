@@ -4,4 +4,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF0D</color>
+    <color name="max_blue">#30D9EF</color>
+    <color name="mid_blue">#0DAEC3</color>
+    <color name="min_blue">#96E8F3</color>
+    <color name="gray">#636363</color>
+    <color name="big_stone">#1c3245</color>
+    <color name="pickled_bluewood">#2b3e54</color>
+    <color name="river_bed">#4d5c6a</color>
+    <color name="bali_hai">#91aab6</color>
+    <color name="mystic">#ecf0f3</color>
+
 </resources>

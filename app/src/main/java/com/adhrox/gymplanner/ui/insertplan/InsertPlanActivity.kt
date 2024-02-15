@@ -41,17 +41,24 @@ class InsertPlanActivity : AppCompatActivity() {
     }
 
     private fun initItems() {
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, DayModel.values())
+        val arrayAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, DayModel.values())
         binding.spinnerDays.adapter = arrayAdapter
     }
 
     private fun addExercise() {
         val exercise = binding.etExercise.text.toString()
         val day = binding.spinnerDays.selectedItem as DayModel
-        val routineInfo = listOf(binding.etDuration, binding.etSets, binding.etReps, binding.etRest).map { it.text.toString() }
+        val routineInfo = listOf(
+            binding.etDuration,
+            binding.etSets,
+            binding.etReps,
+            binding.etRest,
+            binding.etWeight
+        ).map { it.text.toString() }
 
 
-        if(exercise.isNotEmpty()){
+        if (exercise.isNotEmpty()) {
 
             Toast.makeText(
                 this,
@@ -63,7 +70,7 @@ class InsertPlanActivity : AppCompatActivity() {
 
             onBackPressedDispatcher.onBackPressed()
 
-        }else{
+        } else {
             Toast.makeText(
                 this,
                 "Escriba un ejercicio",

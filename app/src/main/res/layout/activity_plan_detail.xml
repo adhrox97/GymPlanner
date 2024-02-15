@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/primaryBackground"
     tools:context=".ui.plandetail.PlanDetailActivity">
 
     <ImageView
@@ -23,18 +24,28 @@
         android:text="@string/delete_all_plans"
         android:layout_marginTop="12dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivDeleteById"/>
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintEnd_toStartOf="@+id/ivEdit"/>
 
-    <ImageView
-        android:id="@+id/ivDeleteById"
+    <Button
+        android:id="@+id/btnEditPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_delete"
+        android:text="@string/save"
+        android:enabled="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivEdit" />
+
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
         android:padding="24dp"
         app:tint="@color/red"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/btnEditPlan"/>
 
     <TextView
         android:id="@+id/tvId"
@@ -48,20 +59,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:textSize="24sp"
         tools:text="Test"
         android:paddingHorizontal="72dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDeleteById"/>
+        app:layout_constraintTop_toBottomOf="@+id/ivBack"/>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        app:dividerColor="@color/black"
+        app:dividerColor="@color/gray"
         app:layout_constraintTop_toBottomOf="@+id/tvExerciseName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -70,10 +80,22 @@
         android:id="@+id/rvRoutineInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDeleteById"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/red"
+        android:src="@drawable/ic_delete"
+        android:layout_margin="32dp"
+        app:tint="@color/white"
+        app:shapeAppearanceOverlay="@style/FabShapeStyle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/tvError"

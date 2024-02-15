@@ -17,6 +17,16 @@ class RoutineInfoCategoryAdapter(
         this.infoRoutineList = infoRoutineList
         notifyDataSetChanged()
     }*/
+    private var editingStatus = false
+    fun enableEditing(enable: Boolean) {
+        editingStatus = enable
+        updateList()
+    }
+
+    fun updateList(){
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutineInfoCategoryViewHolder {
         return RoutineInfoCategoryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_routine_info, parent, false))
     }
@@ -24,6 +34,6 @@ class RoutineInfoCategoryAdapter(
     override fun getItemCount() = infoRoutineList.size
 
     override fun onBindViewHolder(holder: RoutineInfoCategoryViewHolder, position: Int) {
-        holder.render(infoRoutineList[position], planDetail, onItemSelected)
+        holder.render(infoRoutineList[position], planDetail, editingStatus, onItemSelected)
     }
 }

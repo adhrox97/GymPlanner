@@ -35,6 +35,10 @@ class PlanRepository @Inject constructor(private val planDao: PlanDao): Reposito
         return null
     }
 
+    override suspend fun editPlan(plan: PlanEntity) {
+        planDao.editPlan(plan)
+    }
+
     override suspend fun deleteDataById(id: Int) {
         planDao.deleteDataById(id)
     }

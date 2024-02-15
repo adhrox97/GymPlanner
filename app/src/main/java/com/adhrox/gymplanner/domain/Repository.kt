@@ -16,6 +16,8 @@ interface Repository {
 
     suspend fun getDataById(id: Int): Plan?
 
+    suspend fun editPlan(plan: PlanEntity)
+
     suspend fun deleteDataById(id: Int)
 
     suspend fun deleteAllContentTable()

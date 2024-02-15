@@ -4,37 +4,51 @@
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginHorizontal="5dp"
+    tools:cardBackgroundColor="@color/red"
+    style="@style/cardView">
+    <!--android:layout_marginHorizontal="5dp"
     android:layout_weight="1"
-    app:cardCornerRadius="16dp"
-    tools:cardBackgroundColor="@color/red">
+    app:cardCornerRadius="16dp"-->
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivRoutineInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
+            tools:src="@drawable/ic_clock"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/etRoutineInfoData"
             />
 
-        <TextView
-            android:id="@+id/tvRoutineInfoData"
+        <EditText
+            android:id="@+id/etRoutineInfoData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="4"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:background="@null"
+            android:padding="10dp"
+            android:focusableInTouchMode="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivRoutineInfo"
+            app:layout_constraintBottom_toTopOf="@+id/tvRoutineInfoName"/>
 
         <TextView
             android:id="@+id/tvRoutineInfoName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Sets"/>
+            tools:text="Sets"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etRoutineInfoData"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.adhrox.gymplanner.data.database.entities.PlanEntity
 import com.adhrox.gymplanner.domain.model.DayModel
 
@@ -24,6 +25,9 @@ interface PlanDao {
 
     @Query("SELECT * FROM plan_table WHERE id = :id")
     fun getDataById(id: Int): PlanEntity
+
+    @Update
+    fun editPlan(plan: PlanEntity)
 
     @Query("DELETE FROM plan_table WHERE id = :id")
     fun deleteDataById(id: Int)

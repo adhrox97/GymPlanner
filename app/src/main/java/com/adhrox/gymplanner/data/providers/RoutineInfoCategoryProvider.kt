@@ -11,7 +11,8 @@ class RoutineInfoCategoryProvider @Inject constructor() {
             Duration,
             Sets,
             Reps,
-            Rest
+            Rest,
+            Weight
         )
 
     }
