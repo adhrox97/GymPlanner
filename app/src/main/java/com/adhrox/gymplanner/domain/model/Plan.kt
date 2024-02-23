@@ -3,7 +3,7 @@ package com.adhrox.gymplanner.domain.model
 import com.adhrox.gymplanner.data.database.entities.PlanEntity
 
 data class Plan(
-    val id: Int = 0,
+    val id: Long = 0,
     val ejercicio: String,
     val dia: DayModel,
     val duration: Float,

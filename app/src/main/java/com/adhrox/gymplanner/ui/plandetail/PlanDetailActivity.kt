@@ -16,21 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.ActivityPlanDetailBinding
 import com.adhrox.gymplanner.domain.model.RoutineInfoCategory
+import com.adhrox.gymplanner.domain.model.Set
+import com.adhrox.gymplanner.ui.plandetail.adapters.SetAdapter
 import com.adhrox.gymplanner.ui.plandetail.adapters.RoutineInfoCategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Delay
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 
 @AndroidEntryPoint
 class PlanDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlanDetailBinding
     private lateinit var routineInfoCategoryAdapter: RoutineInfoCategoryAdapter
+    private lateinit var setAdapter: SetAdapter
     private var currentPlan: PlanDetailState.Success? = null
     private val planDetailViewModel: PlanDetailViewModel by viewModels()
     private val args: PlanDetailActivityArgs by navArgs()
@@ -40,7 +36,8 @@ class PlanDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlanDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        planDetailViewModel.getDataById(args.idPlan)
+        planDetailViewModel.getDataWithSetById(args.idPlan)
+        planDetailViewModel.getAllSets()
         initUI()
     }
 
@@ -106,6 +103,12 @@ class PlanDetailActivity : AppCompatActivity() {
             adapter = routineInfoCategoryAdapter
         }
 
+        setAdapter = SetAdapter(planDetail.set) { onSetSelected(it) }
+        binding.rvSet.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = setAdapter
+        }
+
     }
 
     private fun onItemSelected(infoSelected: RoutineInfoCategory, planDetail: PlanDetailState.Success) {
@@ -126,6 +129,12 @@ class PlanDetailActivity : AppCompatActivity() {
 
     }
 
+    private fun onSetSelected(set: Set) {
+
+        planDetailViewModel.updateSetById(!set.isSelected, set.setId, set.planId)
+
+    }
+
     private fun editPlan() {
         if(currentPlan != null) {
 
@@ -141,9 +150,11 @@ class PlanDetailActivity : AppCompatActivity() {
                 data.add(dataText)
             }
 
-            planDetailViewModel.editAndGet(plan.id, plan.exercise, plan.day, data)
+            val (strDuration, strSets, strReps, strRest, strWeight) = data
 
-            routineInfoCategoryAdapter.updateList()
+            planDetailViewModel.updatePlanAndGet(plan.id, plan.exercise, plan.day, strDuration, strSets, strReps, strRest, strWeight, plan.sets)
+            //setAdapter.updateList()
+            //routineInfoCategoryAdapter.updateList()
             enableEdit()
         }
     }

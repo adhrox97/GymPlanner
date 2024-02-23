@@ -126,7 +126,7 @@ class PlannerFragment : Fragment() {
 
     }
 
-    private fun navigateToPlanDetail(id: Int) {
+    private fun navigateToPlanDetail(id: Long) {
 
         findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToPlanDetailActivity(id))
 

@@ -23,7 +23,7 @@ class RoutineInfoCategoryAdapter(
         updateList()
     }
 
-    fun updateList(){
+    private fun updateList(){
         notifyDataSetChanged()
     }
 

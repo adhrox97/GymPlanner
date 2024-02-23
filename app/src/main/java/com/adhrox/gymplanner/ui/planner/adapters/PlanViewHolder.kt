@@ -10,8 +10,11 @@ class PlanViewHolder(view: View): RecyclerView.ViewHolder(view){
     private val binding = ItemPlanBinding.bind(view)
 
     fun render(plan: Plan, onItemPlanSelected: (Plan) -> Unit){
+
+        val context = binding.tvDia.context
+
         binding.tvEjercicio.text = plan.ejercicio
-        binding.tvDia.text = plan.dia.name
+        binding.tvDia.text = context.getString(plan.dia.refDay)
         binding.root.setOnClickListener { onItemPlanSelected(plan) }
     }
 }

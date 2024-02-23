@@ -17,11 +17,16 @@ import javax.inject.Inject
 @HiltViewModel
 class InsertPlanViewModel @Inject constructor(private val insertPlanUseCase: InsertPlanUseCase): ViewModel() {
 
-    fun insertPlan(exercise: String, day: DayModel, strRoutineInfo: List<String>){
-        viewModelScope.launch {
-            withContext(Dispatchers.IO){ insertPlanUseCase.insertPlan(exercise, day, strRoutineInfo) }
+    fun insertPlan(exercise: String, day: DayModel, strDuration: String, strSets: String, strReps: String, strRest: String, strWeight: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            insertPlanUseCase.insertPlan(exercise, day, strDuration, strSets, strReps, strRest, strWeight)
         }
+    }
 
+    fun insertPlanWithSet(exercise: String, day: DayModel, strDuration: String, strSets: String, strReps: String, strRest: String, strWeight: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            insertPlanUseCase.insertPlanWithSet(exercise, day, strDuration, strSets, strReps, strRest, strWeight)
+        }
     }
 
 }

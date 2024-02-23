@@ -42,13 +42,18 @@ class InsertPlanActivity : AppCompatActivity() {
 
     private fun initItems() {
         val arrayAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, DayModel.values())
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, getDayNameList())
         binding.spinnerDays.adapter = arrayAdapter
     }
 
     private fun addExercise() {
+
         val exercise = binding.etExercise.text.toString()
-        val day = binding.spinnerDays.selectedItem as DayModel
+
+        val strDay =  binding.spinnerDays.selectedItem
+
+        val day = DayModel.values().find { getString(it.refDay) == strDay }
+
         val routineInfo = listOf(
             binding.etDuration,
             binding.etSets,
@@ -56,6 +61,8 @@ class InsertPlanActivity : AppCompatActivity() {
             binding.etRest,
             binding.etWeight
         ).map { it.text.toString() }
+
+        val (strDuration, strSets, strReps, strRest, strWeight) = routineInfo
 
 
         if (exercise.isNotEmpty()) {
@@ -66,7 +73,7 @@ class InsertPlanActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
 
-            insertPlanViewModel.insertPlan(exercise, day, routineInfo)
+            insertPlanViewModel.insertPlanWithSet(exercise, day!!, strDuration, strSets, strReps, strRest, strWeight)
 
             onBackPressedDispatcher.onBackPressed()
 
@@ -78,5 +85,12 @@ class InsertPlanActivity : AppCompatActivity() {
             ).show()
 
         }
+    }
+
+    private fun getDayNameList(): List<String> {
+        val dayNameList = DayModel.values().map{
+            getString(it.refDay)
+        }
+        return dayNameList
     }
 }

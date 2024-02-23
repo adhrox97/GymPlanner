@@ -29,6 +29,6 @@
         tools:layout="@layout/activity_plan_detail" >
         <argument
             android:name="idPlan"
-            app:argType="integer" />
+            app:argType="long" />
     </activity>
 </navigation>

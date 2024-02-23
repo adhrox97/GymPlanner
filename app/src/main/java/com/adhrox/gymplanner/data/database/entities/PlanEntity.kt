@@ -9,7 +9,7 @@ import com.adhrox.gymplanner.domain.model.Plan
 @Entity(tableName = "plan_table")
 data class PlanEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Int = 0,
+    @ColumnInfo(name = "id") val id: Long = 0,
     @ColumnInfo(name = "ejercicio") val ejercicio: String,
     @ColumnInfo(name = "dia") val dia: DayModel,
     @ColumnInfo(name = "duration") val duration: Float,

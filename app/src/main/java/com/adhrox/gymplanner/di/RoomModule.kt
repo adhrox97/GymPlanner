@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.adhrox.gymplanner.data.PlanRepository
 import com.adhrox.gymplanner.data.database.PlanDatabase
 import com.adhrox.gymplanner.data.database.dao.PlanDao
+import com.adhrox.gymplanner.data.database.dao.SetDao
 import com.adhrox.gymplanner.domain.Repository
 import dagger.Module
 import dagger.Provides
@@ -28,9 +29,13 @@ object RoomModule {
     @Provides
     fun providePlanDao(db: PlanDatabase) = db.getPlanDao()
 
+    @Singleton
     @Provides
-    fun provideRepository(planDao: PlanDao): Repository{
-        return PlanRepository(planDao)
+    fun provideSetDao(db: PlanDatabase) = db.getSetDao()
+
+    @Provides
+    fun provideRepository(planDao: PlanDao, setDao: SetDao): Repository{
+        return PlanRepository(planDao, setDao)
     }
 
 }

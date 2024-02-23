@@ -9,8 +9,12 @@ class DeletePlansUseCase @Inject constructor(private val repository: Repository)
         repository.deleteAllContentTable()
     }
 
-    suspend fun deleteDataById(id: Int){
+    suspend fun deleteDataById(id: Long){
         repository.deleteDataById(id)
+    }
+
+    suspend fun deleteSetByPlanId(planId: Long){
+        repository.deleteSetByPlanId(planId)
     }
 
 }
