@@ -60,6 +60,11 @@ class PlanRepository @Inject constructor(private val planDao: PlanDao, private v
         return null
     }
 
+    override suspend fun getDataWithSetsByDay(day: DayModel): List<PlanWithSet> {
+        val response = planDao.getDataWithSetsByDay(day)
+        return response.map { it.toDomain() }
+    }
+
     override suspend fun updatePlan(plan: PlanEntity) {
         planDao.updatePlan(plan)
     }

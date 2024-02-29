@@ -24,6 +24,7 @@
     <string name="confirmation">Confirmación</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="of">de</string>
     <string-array name="dias">
         <item>Lunes</item>
         <item>Martes</item>

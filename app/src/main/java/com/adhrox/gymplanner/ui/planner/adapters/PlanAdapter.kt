@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.domain.model.Plan
+import com.adhrox.gymplanner.domain.model.PlanWithSet
 
-class PlanAdapter(private var planList: List<Plan> = emptyList(), private val onItemPlanSelected: (Plan) -> Unit): RecyclerView.Adapter<PlanViewHolder>() {
+class PlanAdapter(private var planList: List<PlanWithSet> = emptyList(), private val onItemPlanSelected: (PlanWithSet) -> Unit): RecyclerView.Adapter<PlanViewHolder>() {
 
-    fun updateList(planList: List<Plan>) {
+    fun updateList(planList: List<PlanWithSet>) {
         this.planList = planList
         notifyDataSetChanged()
     }

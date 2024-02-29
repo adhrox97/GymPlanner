@@ -28,6 +28,8 @@ interface Repository {
 
     suspend fun getDataWithSetsById(id: Long): PlanWithSet?
 
+    suspend fun getDataWithSetsByDay(day: DayModel): List<PlanWithSet>
+
     suspend fun updatePlan(plan: PlanEntity)
 
     suspend fun updatePlanWithSet(plan: PlanWithSetEntity)

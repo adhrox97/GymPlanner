@@ -105,7 +105,7 @@ class PlanDetailActivity : AppCompatActivity() {
 
         setAdapter = SetAdapter(planDetail.set) { onSetSelected(it) }
         binding.rvSet.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = setAdapter
         }
 

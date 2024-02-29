@@ -6,6 +6,7 @@ import com.adhrox.gymplanner.data.providers.DaysProvider
 import com.adhrox.gymplanner.domain.model.DayInfo
 import com.adhrox.gymplanner.domain.model.DayModel
 import com.adhrox.gymplanner.domain.model.Plan
+import com.adhrox.gymplanner.domain.model.PlanWithSet
 import com.adhrox.gymplanner.domain.usecase.GetPlansUseCase
 import com.adhrox.gymplanner.domain.usecase.InsertPlanUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,8 +25,8 @@ class PlannerViewModel @Inject constructor(daysProvider: DaysProvider, private v
     private var _exercises = MutableStateFlow<List<Plan>>(emptyList())
     private val exercises: StateFlow<List<Plan>> = _exercises
 
-    private var _exercisesDay = MutableStateFlow<List<Plan>>(emptyList())
-    val exercisesDay: StateFlow<List<Plan>> = _exercisesDay
+    private var _exercisesDay = MutableStateFlow<List<PlanWithSet>>(emptyList())
+    val exercisesDay: StateFlow<List<PlanWithSet>> = _exercisesDay
 
     init {
         _days.value = daysProvider.getDays()
@@ -38,11 +39,18 @@ class PlannerViewModel @Inject constructor(daysProvider: DaysProvider, private v
         }
         return exercises
     }
-    fun getDataByDay(day: DayModel): StateFlow<List<Plan>>{
+    /*fun getDataByDay(day: DayModel): StateFlow<List<Plan>>{
         viewModelScope.launch {
             val plans = withContext(Dispatchers.IO){getPlansUseCase.getDataByDay(day)}
             _exercisesDay.value = plans
         }
         return exercisesDay
+    }*/
+
+    fun getDataWithSetsByDay(day: DayModel) {
+        viewModelScope.launch {
+            val plans = withContext(Dispatchers.IO){getPlansUseCase.getDataWithSetsByDay(day)}
+            _exercisesDay.value = plans
+        }
     }
 }

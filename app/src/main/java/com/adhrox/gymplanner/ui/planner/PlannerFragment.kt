@@ -18,12 +18,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.FragmentPlannerBinding
 import com.adhrox.gymplanner.domain.model.DayInfo
 import com.adhrox.gymplanner.domain.model.DayModel
 import com.adhrox.gymplanner.domain.model.Plan
+import com.adhrox.gymplanner.domain.model.PlanWithSet
 import com.adhrox.gymplanner.ui.planner.adapters.PlanAdapter
 import com.adhrox.gymplanner.ui.planner.adapters.PlannerDayAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,13 +47,13 @@ class PlannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        plannerViewModel.getDataByDay(getDay())
+        plannerViewModel.getDataWithSetsByDay(getDay())
         initUI()
     }
 
     override fun onResume() {
         super.onResume()
-        plannerViewModel.getDataByDay(currentlySelectedDay)
+        plannerViewModel.getDataWithSetsByDay(currentlySelectedDay)
     }
 
     private fun initUI() {
@@ -65,7 +67,7 @@ class PlannerFragment : Fragment() {
     }
 
     private fun initList() {
-        plannerDayAdapter = PlannerDayAdapter() {onItemSelected(it)}
+        plannerDayAdapter = PlannerDayAdapter(initDay = currentlySelectedDay.ordinal) {onItemSelected(it)}
         binding.rvDay.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = plannerDayAdapter
@@ -73,19 +75,20 @@ class PlannerFragment : Fragment() {
 
         planAdapter = PlanAdapter() {onItemPlanSelected(it)}
         binding.rvPlan.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            //layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = planAdapter
         }
 
     }
 
-    private fun onItemPlanSelected(planSelected: Plan) {
-        navigateToPlanDetail(planSelected.id)
+    private fun onItemPlanSelected(planSelected: PlanWithSet) {
+        navigateToPlanDetail(planSelected.plan.id)
     }
 
     private fun onItemSelected(daySelected: DayInfo) {
         val dayName = daySelected::class.java.simpleName
-        plannerViewModel.getDataByDay(getDayModelByString(dayName))
+        plannerViewModel.getDataWithSetsByDay(getDayModelByString(dayName))
 
     }
 

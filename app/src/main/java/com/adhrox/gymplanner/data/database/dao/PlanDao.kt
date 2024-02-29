@@ -43,6 +43,10 @@ interface PlanDao {
     @Query("SELECT * FROM plan_table where id = :id")
     fun getDataWithSetsById(id: Long): PlanWithSetEntity
 
+    @Transaction
+    @Query("SELECT * FROM plan_table where dia = :day")
+    fun getDataWithSetsByDay(day: DayModel): List<PlanWithSetEntity>
+
     @Update
     fun updatePlan(plan: PlanEntity)
 

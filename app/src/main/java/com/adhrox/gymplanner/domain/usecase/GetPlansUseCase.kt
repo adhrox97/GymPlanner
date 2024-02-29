@@ -20,6 +20,10 @@ class GetPlansUseCase @Inject constructor(private val repository: Repository) {
         return repository.getDataByDay(day)
     }
 
+    suspend fun getDataWithSetsByDay(day: DayModel): List<PlanWithSet>{
+        return repository.getDataWithSetsByDay(day)
+    }
+
     suspend fun geDataById(id: Long): Plan?{
         return repository.getDataById(id)
     }
