@@ -14,7 +14,7 @@
     <string name="save">Guardar</string>
     <string name="start">Iniciar</string>
     <string name="reset">Reiniciar</string>
-    <string name="Dia">Dia</string>
+    <string name="day">Dia</string>
     <string name="duration">Duracion</string>
     <string name="sets">Series</string>
     <string name="reps">Repeticiones</string>
@@ -25,6 +25,7 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="of">de</string>
+    <string name="default_text">sample_text</string>
     <string-array name="dias">
         <item>Lunes</item>
         <item>Martes</item>

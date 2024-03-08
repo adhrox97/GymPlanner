@@ -41,25 +41,25 @@ class InsertPlanActivity : AppCompatActivity() {
     }
 
     private fun initItems() {
-        val arrayAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, getDayNameList())
-        binding.spinnerDays.adapter = arrayAdapter
+        val arrayAdapter = ArrayAdapter(this, R.layout.selected_item_spinner, getDayNameList())
+        arrayAdapter.setDropDownViewResource(R.layout.dropdown_item_spinner)
+        binding.iicvDay.spinner.adapter = arrayAdapter
     }
 
     private fun addExercise() {
 
         val exercise = binding.etExercise.text.toString()
 
-        val strDay =  binding.spinnerDays.selectedItem
+        val strDay =  binding.iicvDay.spinner.selectedItem
 
         val day = DayModel.values().find { getString(it.refDay) == strDay }
 
         val routineInfo = listOf(
-            binding.etDuration,
-            binding.etSets,
-            binding.etReps,
-            binding.etRest,
-            binding.etWeight
+            binding.iicvDuration.editText,
+            binding.iicvSets.editText,
+            binding.iicvReps.editText,
+            binding.iicvRest.editText,
+            binding.iicvWeight.editText
         ).map { it.text.toString() }
 
         val (strDuration, strSets, strReps, strRest, strWeight) = routineInfo

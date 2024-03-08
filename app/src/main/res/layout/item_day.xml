@@ -30,6 +30,7 @@
         android:id="@+id/tvDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr"
         tools:text="Test"
         android:textColor="@color/day_text_color_selector"/>
 

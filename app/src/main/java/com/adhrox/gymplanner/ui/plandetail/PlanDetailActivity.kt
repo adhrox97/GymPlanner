@@ -3,6 +3,7 @@ package com.adhrox.gymplanner.ui.plandetail
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -47,9 +48,7 @@ class PlanDetailActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.btnDeletePlans.setOnClickListener {
-            planDetailViewModel.deleteAllContentTable()
-        }
+
         binding.fabDeleteById.setOnClickListener { showDialogDeletePlanById() }
         binding.ivBack.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.ivEdit.setOnClickListener { enableEdit() }
@@ -79,7 +78,6 @@ class PlanDetailActivity : AppCompatActivity() {
         binding.pbPlanDetail.isVisible = false
         binding.tvError.isVisible = false
 
-        binding.tvId.text = stateSuccess.id.toString()
         binding.tvExerciseName.text = stateSuccess.exercise
 
         initList(stateSuccess)
@@ -149,7 +147,7 @@ class PlanDetailActivity : AppCompatActivity() {
                 val dataText = editText.text.toString()
                 data.add(dataText)
             }
-
+            Log.i("adhrox", "xD")
             val (strDuration, strSets, strReps, strRest, strWeight) = data
 
             planDetailViewModel.updatePlanAndGet(plan.id, plan.exercise, plan.day, strDuration, strSets, strReps, strRest, strWeight, plan.sets)

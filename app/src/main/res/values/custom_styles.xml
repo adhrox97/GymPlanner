@@ -16,7 +16,7 @@
         <item name="cornerFamilyBottomRight">cut</item>
     </style>
 
-    <style name="MyCardView" parent="@style/Widget.MaterialComponents.CardView">
+    <style name="cardViewPlanStyle" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut</item>
     </style>
 
@@ -25,8 +25,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerSizeBottomRight">16dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
     </style>
 
 </resources>

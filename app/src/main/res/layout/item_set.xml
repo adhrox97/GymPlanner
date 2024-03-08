@@ -5,6 +5,7 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_margin="4dp"
+    style="@style/iconStyle"
     app:shapeAppearanceOverlay="@style/circularStyle"
     app:srcCompat="@drawable/ic_check"
     android:background="@color/green">

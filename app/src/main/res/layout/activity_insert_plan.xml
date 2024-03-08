@@ -4,145 +4,162 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/primaryBackground"
+    android:background="?attr/backgroundPrimaryColor"
     tools:context=".ui.insertplan.InsertPlanActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/kettlebell"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
+        app:tint="@color/black"
         android:padding="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <Button
-        android:id="@+id/btnAddExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
-        android:text="@string/add_exercise"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/etExercise"/>
-
-    <EditText
-        android:id="@+id/etExercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:hint="@string/hint_write_exercise"
-        android:paddingHorizontal="72dp"
-        android:textSize="24sp"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/ivBack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:inputType="text"
-        android:importantForAutofill="no" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        app:dividerColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/etExercise"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/llcDay"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="?attr/backgroundPrimaryColor"
+        app:cardCornerRadius="32dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="-30dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_days"
-            android:layout_margin="16dp"/>
-        
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAddExercise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/Dia" />
+                android:layout_marginTop="-6dp"
+                android:layout_marginEnd="-6dp"
+                app:srcCompat="@drawable/ic_plus"
+                app:shapeAppearanceOverlay="@style/FabShapeStyle2"
+                app:maxImageSize="48dp"
+                app:fabCustomSize="70dp"
+                app:tint="@color/black"
+                android:backgroundTint="#03A9F4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            <Spinner
-                android:id="@+id/spinnerDays"
+            <EditText
+                android:id="@+id/etExercise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"/>
+                android:backgroundTint="@color/white"
+                android:hint="@string/hint_write_exercise"
+                android:paddingHorizontal="72dp"
+                android:textSize="24sp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/divider"
+                android:inputType="text"
+                android:importantForAutofill="no"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:dividerColor="@color/black"
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                app:layout_constraintTop_toBottomOf="@+id/btnAddExercise"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnAddExercise"/>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/llcDay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+            <GridLayout
+                android:id="@+id/glInsertInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:columnCount="2"
+                android:rowCount="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Duration"/>
-        <EditText
-            android:id="@+id/etDuration"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_days"
+                    app:customText="@string/day"
+                    app:viewType="spinner"
+                    />
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvDuration"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_clock"
+                    app:customText="@string/duration"
+                    app:viewType="editText"
+                    />
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvSets"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_sets"
+                    app:customText="@string/sets"
+                    app:viewType="editText"
+                    />
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvReps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_reps"
+                    app:customText="@string/reps"
+                    app:viewType="editText"
+                    />
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvRest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_rest"
+                    app:customText="@string/rest"
+                    app:viewType="editText"
+                    />
+                <com.adhrox.gymplanner.ui.insertplan.customviews.InfoInsertCustomView
+                    android:id="@+id/iicvWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:imageSrc="@drawable/ic_weight"
+                    app:customText="@string/weight"
+                    app:viewType="editText"
+                    />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sets"/>
-        <EditText
-            android:id="@+id/etSets"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
+            </GridLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reps"/>
-        <EditText
-            android:id="@+id/etReps"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rest"/>
-        <EditText
-            android:id="@+id/etRest"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weight"/>
-        <EditText
-            android:id="@+id/etWeight"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

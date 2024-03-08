@@ -9,15 +9,52 @@
     app:cardCornerRadius="16dp"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="8dp">
+
+
+    <ImageView
+        android:id="@+id/ivPlan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/crossfit"
+        android:scaleType="centerCrop"
+        />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/red"/>
+            app:cardBackgroundColor="#03A9F4"
+            app:strokeWidth="0dp"
+            style="@style/cardViewPlanStyle">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/noto_sans_kr"
+                    tools:text="Test"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvRepsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Test"
+                    android:layout_gravity="center_horizontal|bottom"/>
+
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,26 +65,13 @@
                 android:id="@+id/tvEjercicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tools:text="TODO BIEN?"/>
-
-            <TextView
-                android:id="@+id/tvDia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tools:text="TODO BIEN?"/>
+                android:layout_margin="8dp"
+                android:textColor="@color/black"
+                tools:text="Test"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tvRepsCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Test"
-                    android:layout_gravity="center_horizontal|bottom"/>
 
             </FrameLayout>
 
