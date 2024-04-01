@@ -16,6 +16,7 @@
         <activity
             android:name=".ui.plandetail.PlanDetailActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.insertplan.InsertPlanActivity"

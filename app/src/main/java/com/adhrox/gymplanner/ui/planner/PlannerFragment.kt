@@ -1,16 +1,9 @@
 package com.adhrox.gymplanner.ui.planner
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,12 +17,10 @@ import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.FragmentPlannerBinding
 import com.adhrox.gymplanner.domain.model.DayInfo
 import com.adhrox.gymplanner.domain.model.DayModel
-import com.adhrox.gymplanner.domain.model.Plan
 import com.adhrox.gymplanner.domain.model.PlanWithSet
 import com.adhrox.gymplanner.ui.planner.adapters.PlanAdapter
 import com.adhrox.gymplanner.ui.planner.adapters.PlannerDayAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
@@ -41,6 +32,8 @@ class PlannerFragment : Fragment() {
     private lateinit var plannerDayAdapter: PlannerDayAdapter
     private lateinit var planAdapter: PlanAdapter
     private lateinit var currentlySelectedDay: DayModel
+
+    private var planList: List<PlanWithSet> = emptyList()
 
     private var _binding: FragmentPlannerBinding? = null
     private val binding get() = _binding!!
@@ -64,22 +57,22 @@ class PlannerFragment : Fragment() {
 
     private fun initListeners() {
         binding.fabAddPlan.setOnClickListener { navigateToInsertActivity() }
+        binding.fabResetSets.setOnClickListener { resetSets() }
     }
 
     private fun initList() {
-        plannerDayAdapter = PlannerDayAdapter(initDay = currentlySelectedDay.ordinal) {onItemSelected(it)}
+        plannerDayAdapter =
+            PlannerDayAdapter(initDay = currentlySelectedDay.ordinal) { onItemSelected(it) }
         binding.rvDay.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = plannerDayAdapter
         }
 
-        planAdapter = PlanAdapter() {onItemPlanSelected(it)}
+        planAdapter = PlanAdapter() { onItemPlanSelected(it) }
         binding.rvPlan.apply {
-            //layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             layoutManager = GridLayoutManager(context, 2)
             adapter = planAdapter
         }
-
     }
 
     private fun onItemPlanSelected(planSelected: PlanWithSet) {
@@ -89,50 +82,68 @@ class PlannerFragment : Fragment() {
     private fun onItemSelected(daySelected: DayInfo) {
         val dayName = daySelected::class.java.simpleName
         plannerViewModel.getDataWithSetsByDay(getDayModelByString(dayName))
-
     }
-
-
 
     private fun initUIState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                plannerViewModel.days.collect(){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                plannerViewModel.days.collect() {
                     plannerDayAdapter.updateList(it)
                 }
             }
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                plannerViewModel.exercisesDay.collect(){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                plannerViewModel.exercisesDay.collect() {
                     planAdapter.updateList(it)
+                    planList = it
                 }
             }
         }
     }
 
-    private fun getDay(): DayModel{
+    private fun getDay(): DayModel {
         val calendar = Calendar.getInstance()
-        val dayCalendar = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
+        val dayCalendar =
+            calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault())
         return getDayModelByString(dayCalendar!!)
     }
 
-    private fun getDayModelByString(day: String): DayModel{
+    private fun getDayModelByString(day: String): DayModel {
         currentlySelectedDay = DayModel.valueOf(day)
         return currentlySelectedDay
     }
 
+    private fun resetSets() {
+        val setsCount = planList.sumOf { it.sets.count { sets -> sets.isSelected } }
+
+        val resetAlert = when {
+            planList.isEmpty() -> R.string.empty_exercises
+            setsCount == 0 -> R.string.exercises_already_reset
+            else -> {
+                plannerViewModel.resetSetsByDay(currentlySelectedDay)
+                R.string.reset_exercises
+            }
+        }
+
+        Toast.makeText(
+            context,
+            resetAlert,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
     private fun navigateToInsertActivity() {
-
         findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToInsertPlanActivity())
-
     }
 
     private fun navigateToPlanDetail(id: Long) {
-
-        findNavController().navigate(PlannerFragmentDirections.actionPlannerFragmentToPlanDetailActivity(id))
-
+        findNavController().navigate(
+            PlannerFragmentDirections.actionPlannerFragmentToPlanDetailActivity(
+                id
+            )
+        )
     }
 
     override fun onCreateView(

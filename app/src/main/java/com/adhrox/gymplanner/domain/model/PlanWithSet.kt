@@ -7,4 +7,5 @@ data class PlanWithSet(
     val sets: List<Set>
 )
 
-fun PlanWithSetEntity.toDomain() = PlanWithSet(plan = plan.toDomain(), sets = sets.map { it.toDomain() })
+fun PlanWithSetEntity.toDomain() =
+    PlanWithSet(plan = plan.toDomain(), sets = sets.map { it.toDomain() })

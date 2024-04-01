@@ -13,22 +13,27 @@ class RoutineInfoCategoryAdapter(
     private val onItemSelected: (RoutineInfoCategory) -> Unit
 ) : RecyclerView.Adapter<RoutineInfoCategoryViewHolder>() {
 
-/*    fun updateList(infoRoutineList: List<RoutineInfoCategory>){
-        this.infoRoutineList = infoRoutineList
-        notifyDataSetChanged()
-    }*/
+    /*    fun updateList(infoRoutineList: List<RoutineInfoCategory>){
+            this.infoRoutineList = infoRoutineList
+            notifyDataSetChanged()
+        }*/
     private var editingStatus = false
     fun enableEditing(enable: Boolean) {
         editingStatus = enable
         updateList()
     }
 
-    private fun updateList(){
+    private fun updateList() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutineInfoCategoryViewHolder {
-        return RoutineInfoCategoryViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_routine_info, parent, false))
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RoutineInfoCategoryViewHolder {
+        return RoutineInfoCategoryViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_routine_info, parent, false)
+        )
     }
 
     override fun getItemCount() = infoRoutineList.size

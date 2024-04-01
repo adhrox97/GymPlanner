@@ -53,12 +53,24 @@
         android:id="@+id/fabAddPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="@color/red"
+        app:backgroundTint="@color/accent"
         android:src="@drawable/ic_add"
         android:layout_margin="32dp"
         app:tint="@color/white"
-        app:shapeAppearanceOverlay="@style/FabShapeStyle1"
+        app:shapeAppearanceOverlay="@style/custom_circular_fab_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabResetSets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/green"
+        android:src="@drawable/ic_reset"
+        android:layout_margin="32dp"
+        app:tint="@color/white"
+        app:shapeAppearanceOverlay="@style/custom_circular_fab_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

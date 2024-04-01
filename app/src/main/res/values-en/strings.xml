@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plan">Plan</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="delete_all_plans">Delete all plans</string>
+    <string name="hint_write_exercise">Type an exercise</string>
+    <string name="save">Save</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="day">Day</string>
+    <string name="duration">Duration</string>
+    <string name="sets">Sets</string>
+    <string name="reps">Reps</string>
+    <string name="rest">Rest</string>
+    <string name="weight">Weight</string>
+    <string name="alert">Are you sure to perform this action?</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="of">of</string>
+    <string name="default_text">Default text</string>
+    <string name="notes">Notes</string>
+    <string name="reset_exercises">Restarted exercises</string>
+    <string name="exercises_already_reset">Exercises already reset</string>
+    <string name="empty_exercises">There are no exercises to restart</string>
+</resources>

@@ -11,9 +11,11 @@
         android:id="@+id/flCountdown"
         android:layout_width="250dp"
         android:layout_height="250dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <ProgressBar
             android:id="@+id/pbTimer"
             android:layout_width="match_parent"
@@ -25,9 +27,7 @@
             android:layout_gravity="center"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:background="@drawable/gray_progressbar_background"
-            android:progressDrawable="@drawable/blue_progressbar_background"
-            >
-
+            android:progressDrawable="@drawable/blue_progressbar_background">
         </ProgressBar>
 
         <LinearLayout
@@ -43,6 +43,7 @@
                 tools:text="00"
                 android:textSize="32sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/anta"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -54,6 +55,7 @@
                 tools:text="00"
                 android:textSize="32sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/anta"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -63,23 +65,44 @@
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="0dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPlayPause"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:layout_marginVertical="16dp"
+        app:shapeAppearanceOverlay="@style/custom_circular_fab_style"
+        android:src="@drawable/play_fab_countdown_icon_selector"
+        app:backgroundTint="@color/play_fab_countdown_background_color_selector"
+        app:tint="@color/icon_enable_color_selector"
         app:layout_constraintTop_toBottomOf="@+id/flCountdown"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnReset"/>
+        app:layout_constraintEnd_toStartOf="@+id/fabReset"/>
 
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="0dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabReset"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/reset"
+        android:layout_marginVertical="16dp"
+        app:shapeAppearanceOverlay="@style/custom_circular_fab_style"
+        android:src="@drawable/ic_reset"
+        app:backgroundTint="@color/reset_fab_countdown_background_color_selector"
+        app:tint="@color/icon_enable_color_selector"
         app:layout_constraintTop_toBottomOf="@+id/flCountdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        />
+        app:layout_constraintStart_toEndOf="@+id/fabPlayPause"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:shapeAppearanceOverlay="@style/custom_circular_fab_style"
+        android:src="@drawable/ic_close"
+        app:backgroundTint="@color/red"
+        app:tint="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/fabPlayPause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

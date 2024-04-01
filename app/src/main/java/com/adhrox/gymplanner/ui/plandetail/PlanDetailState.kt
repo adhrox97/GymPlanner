@@ -17,6 +17,7 @@ sealed class PlanDetailState {
         val reps: Int,
         val rest: Int,
         val weight: Float,
-        val set: List<Set>
+        val set: List<Set>,
+        val notes: String
     ) : PlanDetailState()
 }

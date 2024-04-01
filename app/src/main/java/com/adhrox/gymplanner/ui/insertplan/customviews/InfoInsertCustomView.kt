@@ -12,7 +12,7 @@ class InfoInsertCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-): LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     private val binding: CustomViewInsertInfoBinding
 
@@ -20,29 +20,31 @@ class InfoInsertCustomView @JvmOverloads constructor(
         binding = CustomViewInsertInfoBinding.inflate(LayoutInflater.from(context), this, true)
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.InfoInsertCustomView)
-        val imageSrc = attributes.getResourceId(R.styleable.InfoInsertCustomView_imageSrc, R.drawable.place_holder)
+        val imageSrc = attributes.getResourceId(
+            R.styleable.InfoInsertCustomView_imageSrc,
+            R.drawable.place_holder
+        )
         val customText = attributes.getString(R.styleable.InfoInsertCustomView_customText)
+        val customTextInfo = attributes.getString(R.styleable.InfoInsertCustomView_customTextInfo)
         val viewType = attributes.getInt(R.styleable.InfoInsertCustomView_viewType, 0)
         attributes.recycle()
 
         binding.customImage.setImageResource(imageSrc)
         binding.customTextView.text = customText
+        binding.customTextInfoView.text = customTextInfo
 
         if (viewType == 0) {
             binding.customEditText.visibility = View.VISIBLE
             binding.customSpinner.visibility = View.GONE
-
-
         } else {
             binding.customEditText.visibility = View.GONE
             binding.customSpinner.visibility = View.VISIBLE
-
         }
-
     }
 
     val editText = binding.customEditText
     val spinner = binding.customSpinner
+    val editTextInfo = binding.customTextInfoView
 
 
 }

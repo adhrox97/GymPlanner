@@ -1,9 +1,5 @@
 package com.adhrox.gymplanner.domain.usecase
 
-import android.util.Log
-import com.adhrox.gymplanner.data.database.entities.PlanEntity
-import com.adhrox.gymplanner.data.database.entities.SetEntity
-import com.adhrox.gymplanner.data.database.entities.toDataBase
 import com.adhrox.gymplanner.data.database.entities.toDataBaseEdit
 import com.adhrox.gymplanner.domain.Repository
 import com.adhrox.gymplanner.domain.model.DayModel
@@ -14,7 +10,6 @@ import com.adhrox.gymplanner.utils.GeneratorUtils
 import javax.inject.Inject
 
 class EditPlanUseCase @Inject constructor(private val repository: Repository) {
-
     suspend fun updatePlan(
         id: Long,
         exercise: String,
@@ -23,9 +18,9 @@ class EditPlanUseCase @Inject constructor(private val repository: Repository) {
         strSets: String,
         strReps: String,
         strRest: String,
-        strWeight: String
+        strWeight: String,
+        notes: String
     ): Long {
-
         val (duration, sets, reps, rest, weight) = ConversionUtils.stringsToListFloat(
             strDuration,
             strSets,
@@ -34,7 +29,17 @@ class EditPlanUseCase @Inject constructor(private val repository: Repository) {
             strWeight
         )
         val editPlan =
-            Plan(id, exercise, day, duration, sets.toInt(), reps.toInt(), rest.toInt(), weight)
+            Plan(
+                id,
+                exercise,
+                day,
+                duration,
+                sets.toInt(),
+                reps.toInt(),
+                rest.toInt(),
+                weight,
+                notes
+            )
 
         repository.updatePlan(editPlan.toDataBaseEdit())
 
@@ -49,9 +54,9 @@ class EditPlanUseCase @Inject constructor(private val repository: Repository) {
         strSets: String,
         strReps: String,
         strRest: String,
-        strWeight: String
+        strWeight: String,
+        notes: String
     ): Long {
-
         val (duration, sets, reps, rest, weight) = ConversionUtils.stringsToListFloat(
             strDuration,
             strSets,
@@ -60,7 +65,17 @@ class EditPlanUseCase @Inject constructor(private val repository: Repository) {
             strWeight
         )
         val editPlan =
-            Plan(id, exercise, day, duration, sets.toInt(), reps.toInt(), rest.toInt(), weight)
+            Plan(
+                id,
+                exercise,
+                day,
+                duration,
+                sets.toInt(),
+                reps.toInt(),
+                rest.toInt(),
+                weight,
+                notes
+            )
 
         val generatedSets = GeneratorUtils.generateSets(sets.toInt(), id)
 
@@ -71,7 +86,6 @@ class EditPlanUseCase @Inject constructor(private val repository: Repository) {
         repository.updatePlanWithSet(planWithSet.toDataBaseEdit())
 
         return id
-
     }
 
     suspend fun updateSetById(isSelected: Boolean, setId: Long) {

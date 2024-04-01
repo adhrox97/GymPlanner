@@ -14,23 +14,24 @@ import com.adhrox.gymplanner.domain.model.Set
 import com.adhrox.gymplanner.domain.model.toDomain
 import javax.inject.Inject
 
-class PlanRepository @Inject constructor(private val planDao: PlanDao, private val setDao: SetDao): Repository {
-    override suspend fun getAllPlanFromDatabase(): List<Plan>{
+class PlanRepository @Inject constructor(private val planDao: PlanDao, private val setDao: SetDao) :
+    Repository {
+    override suspend fun getAllPlanFromDatabase(): List<Plan> {
         val response = planDao.getAllPlans()
         return response.map { it.toDomain() }
     }
 
-    override suspend fun getAllSets(): List<Set>{
+    override suspend fun getAllSets(): List<Set> {
         val response = setDao.getAllSets()
         return response.map { it.toDomain() }
     }
 
-    override suspend fun getDataByDay(day: DayModel): List<Plan>{
+    override suspend fun getDataByDay(day: DayModel): List<Plan> {
         val response = planDao.getDataByDay(day)
         return response.map { it.toDomain() }
     }
 
-    override suspend fun insertPlans(plans: List<PlanEntity>){
+    override suspend fun insertPlans(plans: List<PlanEntity>) {
         planDao.insertAllPlans(plans)
     }
 
@@ -73,8 +74,12 @@ class PlanRepository @Inject constructor(private val planDao: PlanDao, private v
         planDao.updatePlanWithSet(plan.plan, plan.sets)
     }
 
-    override suspend fun updateSetById(isSelected: Boolean, setId: Long){
+    override suspend fun updateSetById(isSelected: Boolean, setId: Long) {
         setDao.updateSetById(isSelected, setId)
+    }
+
+    override suspend fun resetSetsByDay(day: DayModel) {
+        setDao.resetSetsByDay(day)
     }
 
     override suspend fun deleteDataById(id: Long) {

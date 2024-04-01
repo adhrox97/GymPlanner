@@ -9,9 +9,10 @@
     <color name="min_blue">#96E8F3</color>
     <color name="gray">#636363</color>
     <color name="big_stone">#1c3245</color>
-    <color name="pickled_bluewood">#2b3e54</color>
+    <color name="pickled_blue_wood">#2b3e54</color>
     <color name="river_bed">#4d5c6a</color>
     <color name="bali_hai">#91aab6</color>
     <color name="mystic">#ecf0f3</color>
-
+    <color name="yellow">#FFFC27</color>
+    <color name="accent">#03A9F4</color>
 </resources>

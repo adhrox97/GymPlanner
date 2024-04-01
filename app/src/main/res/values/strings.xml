@@ -1,19 +1,22 @@
 <resources>
-    <string name="app_name">GymPlanner</string>
+    <string name="app_name" translatable="false">GymPlanner</string>
     <string name="plan">Planear</string>
-    <string name="Monday">Lunes</string>
-    <string name="Tuesday">Martes</string>
-    <string name="Wednesday">Miercoles</string>
-    <string name="Thursday">Jueves</string>
-    <string name="Friday">Viernes</string>
-    <string name="Saturday">Sabado</string>
-    <string name="Sunday">Domingo</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miercoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sabado</string>
+    <string name="sunday">Domingo</string>
     <string name="add_exercise">Agregar ejercicio</string>
     <string name="delete_all_plans">Eliminar todo</string>
     <string name="hint_write_exercise">Escribe tu ejercicio</string>
     <string name="save">Guardar</string>
     <string name="start">Iniciar</string>
+    <string name="pause">Pausar</string>
     <string name="reset">Reiniciar</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
     <string name="day">Dia</string>
     <string name="duration">Duracion</string>
     <string name="sets">Series</string>
@@ -26,13 +29,8 @@
     <string name="no">No</string>
     <string name="of">de</string>
     <string name="default_text">sample_text</string>
-    <string-array name="dias">
-        <item>Lunes</item>
-        <item>Martes</item>
-        <item>Miercoles</item>
-        <item>Jueves</item>
-        <item>Viernes</item>
-        <item>Sabado</item>
-        <item>Domingo</item>
-    </string-array>
+    <string name="notes">Notas</string>
+    <string name="reset_exercises">Los ejercicios han sido reiniciados</string>
+    <string name="exercises_already_reset">Los ejercicios ya estan reiniciados</string>
+    <string name="empty_exercises">No hay ejercicios que reiniciar</string>
 </resources>

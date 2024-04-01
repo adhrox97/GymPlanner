@@ -1,20 +1,14 @@
 package com.adhrox.gymplanner.ui.insertplan
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.ActivityInsertPlanBinding
 import com.adhrox.gymplanner.domain.model.DayModel
-import com.adhrox.gymplanner.ui.planner.PlannerViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
-import java.util.Locale
-import kotlin.reflect.typeOf
 
 @AndroidEntryPoint
 class InsertPlanActivity : AppCompatActivity() {
@@ -27,10 +21,12 @@ class InsertPlanActivity : AppCompatActivity() {
         binding = ActivityInsertPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
-
     }
 
     private fun initUI() {
+        binding.iicvDuration.editTextInfo.text = getString(R.string.minutes).subSequence(0, 3)
+        binding.iicvRest.editTextInfo.text = getString(R.string.seconds).subSequence(0, 3)
+
         initListeners()
         initItems()
     }
@@ -47,10 +43,9 @@ class InsertPlanActivity : AppCompatActivity() {
     }
 
     private fun addExercise() {
-
         val exercise = binding.etExercise.text.toString()
-
-        val strDay =  binding.iicvDay.spinner.selectedItem
+        val strDay = binding.iicvDay.spinner.selectedItem
+        val notes = binding.etNotes.text.toString()
 
         val day = DayModel.values().find { getString(it.refDay) == strDay }
 
@@ -66,29 +61,28 @@ class InsertPlanActivity : AppCompatActivity() {
 
 
         if (exercise.isNotEmpty()) {
-
-            Toast.makeText(
-                this,
-                "Ejercicio $exercise el dia $day",
-                Toast.LENGTH_LONG
-            ).show()
-
-            insertPlanViewModel.insertPlanWithSet(exercise, day!!, strDuration, strSets, strReps, strRest, strWeight)
-
+            insertPlanViewModel.insertPlanWithSet(
+                exercise,
+                day!!,
+                strDuration,
+                strSets,
+                strReps,
+                strRest,
+                strWeight,
+                notes
+            )
             onBackPressedDispatcher.onBackPressed()
-
         } else {
             Toast.makeText(
                 this,
-                "Escriba un ejercicio",
+                R.string.hint_write_exercise,
                 Toast.LENGTH_LONG
             ).show()
-
         }
     }
 
     private fun getDayNameList(): List<String> {
-        val dayNameList = DayModel.values().map{
+        val dayNameList = DayModel.values().map {
             getString(it.refDay)
         }
         return dayNameList

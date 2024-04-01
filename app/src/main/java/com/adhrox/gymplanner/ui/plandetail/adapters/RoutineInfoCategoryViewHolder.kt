@@ -2,10 +2,7 @@ package com.adhrox.gymplanner.ui.plandetail.adapters
 
 import android.text.InputType
 import android.view.View
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.ItemRoutineInfoBinding
 import com.adhrox.gymplanner.domain.model.RoutineInfoCategory
 import com.adhrox.gymplanner.ui.plandetail.PlanDetailState
@@ -19,7 +16,6 @@ class RoutineInfoCategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) 
         enable: Boolean,
         onItemSelected: (RoutineInfoCategory) -> Unit
     ) {
-
         val context = binding.tvRoutineInfoName.context
 
         binding.ivRoutineInfo.setImageResource(routineInfoCategory.icon)
@@ -53,11 +49,8 @@ class RoutineInfoCategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) 
                 inputType = InputType.TYPE_NULL
                 setBackgroundResource(0)
             }
-
         }
 
         binding.root.isEnabled = !enable
-
     }
-
 }

@@ -10,32 +10,35 @@ import com.adhrox.gymplanner.domain.model.Plan
 data class PlanEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Long = 0,
-    @ColumnInfo(name = "ejercicio") val ejercicio: String,
-    @ColumnInfo(name = "dia") val dia: DayModel,
+    @ColumnInfo(name = "exercise") val exercise: String,
+    @ColumnInfo(name = "day") val day: DayModel,
     @ColumnInfo(name = "duration") val duration: Float,
     @ColumnInfo(name = "sets") val sets: Int,
     @ColumnInfo(name = "reps") val reps: Int,
     @ColumnInfo(name = "rest") val rest: Int,
-    @ColumnInfo(name = "weight") val weight: Float
+    @ColumnInfo(name = "weight") val weight: Float,
+    @ColumnInfo(name = "notes") val notes: String
 )
 
 fun Plan.toDataBase() = PlanEntity(
-    ejercicio = ejercicio,
-    dia = dia,
+    exercise = exercise,
+    day = day,
     duration = duration,
     sets = sets,
     reps = reps,
     rest = rest,
-    weight = weight
+    weight = weight,
+    notes = notes
 )
 
 fun Plan.toDataBaseEdit() = PlanEntity(
     id = id,
-    ejercicio = ejercicio,
-    dia = dia,
+    exercise = exercise,
+    day = day,
     duration = duration,
     sets = sets,
     reps = reps,
     rest = rest,
-    weight = weight
+    weight = weight,
+    notes = notes
 )

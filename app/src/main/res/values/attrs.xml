@@ -4,9 +4,11 @@
     <attr name="unselectedColor" format="color"/>
     <attr name="backgroundPrimaryColor" format="color"/>
     <attr name="backgroundSecondaryColor" format="color"/>
+    <attr name="tintIconColor" format="color"/>
     <declare-styleable name="InfoInsertCustomView">
         <attr name="imageSrc" format="reference"/>
         <attr name="customText" format="string"/>
+        <attr name="customTextInfo" format="string"/>
         <attr name="viewType" format="enum">
             <enum name="editText" value="0"/>
             <enum name="spinner" value="1"/>

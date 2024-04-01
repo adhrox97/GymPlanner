@@ -23,57 +23,78 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="#03A9F4"
-            app:strokeWidth="0dp"
-            style="@style/cardViewPlanStyle">
+            android:orientation="vertical">
 
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="100dp"
+                app:cardBackgroundColor="@color/accent"
+                app:strokeWidth="0dp"
+                style="@style/custom_card_view_plan_style">
 
-                <TextView
-                    android:id="@+id/tvDia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/noto_sans_kr"
-                    tools:text="Test"
-                    android:layout_gravity="center"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/noto_sans_kr"
+                        tools:text="Test"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvSetsState"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:strokeWidth="0dp"
+                style="@style/custom_card_view_status_sets_plan_style">
 
                 <TextView
                     android:id="@+id/tvRepsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="0.0"
+                    android:shadowDy="0.0"
+                    android:shadowRadius="2.0"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/noto_sans_kr"
                     tools:text="Test"
-                    android:layout_gravity="center_horizontal|bottom"/>
+                    android:layout_gravity="center"/>
 
-            </FrameLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvEjercicio"
+                android:id="@+id/tvExercise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:textColor="@color/black"
+                style="@style/subtitle"
                 tools:text="Test"/>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
 
         </LinearLayout>
         

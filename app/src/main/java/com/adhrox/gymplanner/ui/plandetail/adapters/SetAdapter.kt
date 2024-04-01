@@ -11,11 +11,10 @@ class SetAdapter(
     private val onItemSelected: (Set) -> Unit
 ) : RecyclerView.Adapter<SetViewHolder>() {
 
-    fun updateList(){
-        notifyDataSetChanged()
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetViewHolder {
-        return SetViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_set, parent, false))
+        return SetViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_set, parent, false)
+        )
     }
 
     override fun getItemCount() = setsList.size

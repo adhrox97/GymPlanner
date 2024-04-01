@@ -18,7 +18,6 @@ class TimerModel @Inject constructor() {
                 override fun onTick(millisUntilFinished: Long) {
                     listener?.onTimerTick(millisUntilFinished)
                     timeLeftInMillis = millisUntilFinished
-
                 }
 
                 override fun onFinish() {
@@ -27,6 +26,8 @@ class TimerModel @Inject constructor() {
                 }
             }.start()
             timerRunning = true
+        } else {
+            pauseTimer()
         }
     }
 
@@ -60,6 +61,10 @@ class TimerModel @Inject constructor() {
 
     fun getTimeLeftInMillis(): Long {
         return timeSet
+    }
+
+    fun getTimerStatus(): Boolean {
+        return timerRunning
     }
 
     interface TimerListener {

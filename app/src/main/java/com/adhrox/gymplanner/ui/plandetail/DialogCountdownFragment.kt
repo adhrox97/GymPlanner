@@ -1,11 +1,8 @@
 package com.adhrox.gymplanner.ui.plandetail
 
 import android.app.Dialog
-import android.content.DialogInterface
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -18,12 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DialogCountdownFragment(private val timeCountdown: Long): DialogFragment() {
+class DialogCountdownFragment(private val timeCountdown: Long) : DialogFragment() {
+
     private var _binding: DialogCountdownBinding? = null
     private val binding get() = _binding!!
+
     private val planDetailViewModel: PlanDetailViewModel by viewModels()
 
-    private var timeInSeconds = (timeCountdown/1000).toInt()
+    private var timeInSeconds = (timeCountdown / 1000).toInt()
 
     private lateinit var mediaPlayer: MediaPlayer
 
@@ -37,20 +36,21 @@ class DialogCountdownFragment(private val timeCountdown: Long): DialogFragment()
 
         initUI()
 
-
         return builder.create()
-
     }
 
     private fun initUI() {
+        binding.pbTimer.max = timeInSeconds
+        binding.pbTimer.progress = timeInSeconds
+
+        if (timeCountdown == 0L) {
+            binding.fabPlayPause.isEnabled = false
+            binding.fabReset.isEnabled = false
+        }
 
         initUIState()
         initListeners()
         initMedia()
-
-        binding.pbTimer.max = timeInSeconds
-        binding.pbTimer.progress = timeInSeconds
-
     }
 
     private fun initMedia() {
@@ -58,44 +58,59 @@ class DialogCountdownFragment(private val timeCountdown: Long): DialogFragment()
     }
 
     private fun initListeners() {
-        binding.btnStart.setOnClickListener { planDetailViewModel.startTimer() }
-        binding.btnReset.setOnClickListener { planDetailViewModel.resetTimer() }
+        binding.fabPlayPause.setOnClickListener { startTimer() }
+        binding.fabReset.setOnClickListener { resetTimer() }
+        binding.fabClose.setOnClickListener { dismiss() }
     }
 
     private fun initUIState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                planDetailViewModel.timer.collect(){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                planDetailViewModel.timer.collect() {
                     formatCountdownText(it)
                 }
             }
         }
     }
 
-    private fun formatCountdownText(timeLeft: Long){
-        val timeLeftInSeconds = timeLeft/1000
-        val minutes = (timeLeftInSeconds)/60
-        val seconds = (timeLeftInSeconds)%60
+    private fun startTimer() {
+        planDetailViewModel.startTimer()
+        val timerStatus = planDetailViewModel.getTimerStatus()
+
+        binding.fabPlayPause.isSelected = timerStatus
+    }
+
+    private fun resetTimer() {
+        planDetailViewModel.resetTimer()
+
+        binding.fabPlayPause.isSelected = false
+    }
+
+    private fun formatCountdownText(timeLeft: Long) {
+        val timeLeftInSeconds = timeLeft / 1000
+        val minutes = (timeLeftInSeconds) / 60
+        val seconds = (timeLeftInSeconds) % 60
         val minuteFormatted = "%02d".format(minutes)
         val secondFormatted = "%02d".format(seconds)
         binding.tvMinutesCountDown.text = minuteFormatted
         binding.tvSecondsCountDown.text = secondFormatted
         binding.pbTimer.progress = (timeLeftInSeconds).toInt()
 
-        Log.i("adhrox", "$timeLeftInSeconds")
-
-        if (timeLeftInSeconds == 0L){
+        if (timeLeftInSeconds == 0L && timeCountdown != 0L) {
             playSound()
+            binding.fabPlayPause.isSelected = false
         }
 
     }
 
-    private fun playSound(){
+    private fun playSound() {
         mediaPlayer.start()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.pbTimer.max = 0
+        binding.pbTimer.progress = 0
         _binding = null
         mediaPlayer.release()
     }

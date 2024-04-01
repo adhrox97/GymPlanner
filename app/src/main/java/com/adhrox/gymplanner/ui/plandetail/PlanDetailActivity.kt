@@ -1,12 +1,11 @@
 package com.adhrox.gymplanner.ui.plandetail
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,8 +17,8 @@ import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.databinding.ActivityPlanDetailBinding
 import com.adhrox.gymplanner.domain.model.RoutineInfoCategory
 import com.adhrox.gymplanner.domain.model.Set
-import com.adhrox.gymplanner.ui.plandetail.adapters.SetAdapter
 import com.adhrox.gymplanner.ui.plandetail.adapters.RoutineInfoCategoryAdapter
+import com.adhrox.gymplanner.ui.plandetail.adapters.SetAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -58,10 +57,10 @@ class PlanDetailActivity : AppCompatActivity() {
 
     private fun initUIState() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                planDetailViewModel.state.collect(){
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                planDetailViewModel.state.collect() {
 
-                    when(it){
+                    when (it) {
                         is PlanDetailState.Error -> errorState(it)
                         PlanDetailState.Loading -> loadingState()
                         is PlanDetailState.Success -> successState(it)
@@ -80,6 +79,10 @@ class PlanDetailActivity : AppCompatActivity() {
 
         binding.tvExerciseName.text = stateSuccess.exercise
 
+        binding.etPlanNotes.setText(stateSuccess.notes)
+
+        updatePlanNotesState()
+
         initList(stateSuccess)
     }
 
@@ -94,8 +97,11 @@ class PlanDetailActivity : AppCompatActivity() {
         binding.tvError.text = stateError.error
     }
 
-    private fun initList(planDetail: PlanDetailState.Success){
-        routineInfoCategoryAdapter = RoutineInfoCategoryAdapter(planDetailViewModel.getRoutineInfoCategoryList(), planDetail) { onItemSelected(it, planDetail) }
+    private fun initList(planDetail: PlanDetailState.Success) {
+        routineInfoCategoryAdapter = RoutineInfoCategoryAdapter(
+            planDetailViewModel.getRoutineInfoCategoryList(),
+            planDetail
+        ) { onItemSelected(it, planDetail) }
         binding.rvRoutineInfo.apply {
             layoutManager = GridLayoutManager(context, routineInfoCategoryAdapter.itemCount)
             adapter = routineInfoCategoryAdapter
@@ -109,34 +115,36 @@ class PlanDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun onItemSelected(infoSelected: RoutineInfoCategory, planDetail: PlanDetailState.Success) {
+    private fun onItemSelected(
+        infoSelected: RoutineInfoCategory,
+        planDetail: PlanDetailState.Success
+    ) {
 
-        when(infoSelected){
+        when (infoSelected) {
             RoutineInfoCategory.Duration -> {
-                val time = (planDetail.duration*60000).toLong()
+                val time = (planDetail.duration * 60000).toLong()
                 showTimerCountdownDialog(time)
             }
+
             RoutineInfoCategory.Rest -> {
-                val time = (planDetail.rest*1000).toLong()
+                val time = (planDetail.rest * 1000).toLong()
                 showTimerCountdownDialog(time)
             }
+
             RoutineInfoCategory.Reps -> {}
             RoutineInfoCategory.Sets -> {}
             RoutineInfoCategory.Weight -> {}
         }
-
     }
 
     private fun onSetSelected(set: Set) {
-
         planDetailViewModel.updateSetById(!set.isSelected, set.setId, set.planId)
-
     }
 
     private fun editPlan() {
-        if(currentPlan != null) {
-
+        if (currentPlan != null) {
             val plan = currentPlan as PlanDetailState.Success
+            val notes = binding.etPlanNotes.text.toString()
 
             val recyclerViewRoutineInfo = binding.rvRoutineInfo
             val data = mutableListOf<String>()
@@ -147,12 +155,21 @@ class PlanDetailActivity : AppCompatActivity() {
                 val dataText = editText.text.toString()
                 data.add(dataText)
             }
-            Log.i("adhrox", "xD")
+
             val (strDuration, strSets, strReps, strRest, strWeight) = data
 
-            planDetailViewModel.updatePlanAndGet(plan.id, plan.exercise, plan.day, strDuration, strSets, strReps, strRest, strWeight, plan.sets)
-            //setAdapter.updateList()
-            //routineInfoCategoryAdapter.updateList()
+            planDetailViewModel.updatePlanAndGet(
+                plan.id,
+                plan.exercise,
+                plan.day,
+                strDuration,
+                strSets,
+                strReps,
+                strRest,
+                strWeight,
+                notes,
+                plan.sets
+            )
             enableEdit()
         }
     }
@@ -161,6 +178,25 @@ class PlanDetailActivity : AppCompatActivity() {
         enableEdit = !enableEdit
         binding.btnEditPlan.isEnabled = enableEdit
         routineInfoCategoryAdapter.enableEditing(enableEdit)
+        updatePlanNotesState()
+    }
+
+    private fun updatePlanNotesState() {
+        if (enableEdit) {
+            binding.etPlanNotes.apply {
+                isFocusableInTouchMode = true
+                //inputType = InputType.TYPE_CLASS_TEXT
+                isEnabled = true
+                setBackgroundResource(androidx.constraintlayout.widget.R.drawable.abc_edit_text_material)
+            }
+        } else {
+            binding.etPlanNotes.apply {
+                isFocusableInTouchMode = false
+                //inputType = InputType.TYPE_NULL
+                isEnabled = false
+                setBackgroundResource(0)
+            }
+        }
     }
 
     private fun showTimerCountdownDialog(timeCountdown: Long) {
@@ -173,8 +209,7 @@ class PlanDetailActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
     }
 
-    private fun showDialogDeletePlanById(){
-
+    private fun showDialogDeletePlanById() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_alert)
 
@@ -189,8 +224,6 @@ class PlanDetailActivity : AppCompatActivity() {
         btnNegative.setOnClickListener {
             dialog.dismiss()
         }
-
         dialog.show()
     }
-
 }

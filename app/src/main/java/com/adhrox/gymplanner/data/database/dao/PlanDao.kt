@@ -17,7 +17,7 @@ interface PlanDao {
     @Query("SELECT * FROM plan_table")
     fun getAllPlans(): List<PlanEntity>
 
-    @Query("SELECT * FROM plan_table where dia = :day")
+    @Query("SELECT * FROM plan_table where day = :day")
     fun getDataByDay(day: DayModel): List<PlanEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -30,7 +30,7 @@ interface PlanDao {
     fun insertSet(set: List<SetEntity>)
 
     @Transaction
-    fun insertPlanWithSet(plan: PlanEntity, sets: List<SetEntity>){
+    fun insertPlanWithSet(plan: PlanEntity, sets: List<SetEntity>) {
         val planId = insertPlan(plan)
         sets.forEach { it.planId = planId }
         insertSet(sets)
@@ -44,14 +44,14 @@ interface PlanDao {
     fun getDataWithSetsById(id: Long): PlanWithSetEntity
 
     @Transaction
-    @Query("SELECT * FROM plan_table where dia = :day")
+    @Query("SELECT * FROM plan_table where day = :day")
     fun getDataWithSetsByDay(day: DayModel): List<PlanWithSetEntity>
 
     @Update
     fun updatePlan(plan: PlanEntity)
 
     @Transaction
-    fun updatePlanWithSet(plan: PlanEntity, sets: List<SetEntity>){
+    fun updatePlanWithSet(plan: PlanEntity, sets: List<SetEntity>) {
         updatePlan(plan)
         sets.forEach { it.planId = plan.id }
         insertSet(sets)

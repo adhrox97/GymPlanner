@@ -9,7 +9,6 @@ import com.adhrox.gymplanner.domain.model.PlanWithSet
 import com.adhrox.gymplanner.domain.model.Set
 
 interface Repository {
-
     suspend fun getAllPlanFromDatabase(): List<Plan>
 
     suspend fun getAllSets(): List<Set>
@@ -35,6 +34,8 @@ interface Repository {
     suspend fun updatePlanWithSet(plan: PlanWithSetEntity)
 
     suspend fun updateSetById(isSelected: Boolean, setId: Long)
+
+    suspend fun resetSetsByDay(day: DayModel)
 
     suspend fun deleteDataById(id: Long)
 

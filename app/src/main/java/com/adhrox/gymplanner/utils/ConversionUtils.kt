@@ -1,9 +1,7 @@
 package com.adhrox.gymplanner.utils
 
-import android.util.Log
-
 object ConversionUtils {
-     fun stringsToListFloat(vararg routineInfo: String): List<Float> {
+    fun stringsToListFloat(vararg routineInfo: String): List<Float> {
         val numbers = routineInfo.map {
             when {
                 it.isBlank() -> 0.0f

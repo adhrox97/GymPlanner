@@ -1,16 +1,9 @@
 package com.adhrox.gymplanner.ui.plandetail
 
-import android.content.Context
-import android.media.MediaPlayer
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adhrox.gymplanner.R
 import com.adhrox.gymplanner.data.providers.RoutineInfoCategoryProvider
 import com.adhrox.gymplanner.domain.model.DayModel
-import com.adhrox.gymplanner.domain.model.Plan
 import com.adhrox.gymplanner.domain.model.RoutineInfoCategory
 import com.adhrox.gymplanner.domain.model.Set
 import com.adhrox.gymplanner.domain.model.TimerModel
@@ -18,11 +11,8 @@ import com.adhrox.gymplanner.domain.usecase.DeletePlansUseCase
 import com.adhrox.gymplanner.domain.usecase.EditPlanUseCase
 import com.adhrox.gymplanner.domain.usecase.GetPlansUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -66,19 +56,6 @@ class PlanDetailViewModel @Inject constructor(
         }
     }
 
-    /*fun getDataById(id: Long){
-        viewModelScope.launch {
-            _state.value = PlanDetailState.Loading
-
-            val result = withContext(Dispatchers.IO){getPlansUseCase.geDataById(id)}
-            if (result != null){
-                _state.value = PlanDetailState.Success(result.id, result.ejercicio, result.dia, result.duration, result.sets, result.reps, result.rest, result.weight)
-            }else{
-                _state.value = PlanDetailState.Error("Ha sucedido un error, intente mas tarde")
-            }
-        }
-    }*/
-
     fun getDataWithSetById(id: Long) {
         viewModelScope.launch {
             _state.value = PlanDetailState.Loading
@@ -87,14 +64,15 @@ class PlanDetailViewModel @Inject constructor(
             if (result != null) {
                 _state.value = PlanDetailState.Success(
                     result.plan.id,
-                    result.plan.ejercicio,
-                    result.plan.dia,
+                    result.plan.exercise,
+                    result.plan.day,
                     result.plan.duration,
                     result.plan.sets,
                     result.plan.reps,
                     result.plan.rest,
                     result.plan.weight,
-                    result.sets
+                    result.sets,
+                    result.plan.notes
                 )
             } else {
                 _state.value = PlanDetailState.Error("Ha sucedido un error, intente mas tarde")
@@ -111,22 +89,41 @@ class PlanDetailViewModel @Inject constructor(
         strReps: String,
         strRest: String,
         strWeight: String,
+        notes: String,
         currentSets: Int
     ) {
         viewModelScope.launch {
 
             val idPlan = withContext(Dispatchers.IO) {
                 async {
-                    if (strSets.toInt() == currentSets) {
-                        editPlanUseCase.updatePlan(id, exercise, day, strDuration, strSets, strReps, strRest, strWeight)
+                    if ((strSets.toIntOrNull() ?: 0) == currentSets) {
+                        editPlanUseCase.updatePlan(
+                            id,
+                            exercise,
+                            day,
+                            strDuration,
+                            strSets,
+                            strReps,
+                            strRest,
+                            strWeight,
+                            notes
+                        )
                     } else {
-                        editPlanUseCase.updatePlanWithSet(id, exercise, day, strDuration, strSets, strReps, strRest, strWeight)
+                        editPlanUseCase.updatePlanWithSet(
+                            id,
+                            exercise,
+                            day,
+                            strDuration,
+                            strSets,
+                            strReps,
+                            strRest,
+                            strWeight,
+                            notes
+                        )
                     }
                 }
             }
-
             getDataWithSetById(idPlan.await())
-
         }
     }
 
@@ -145,7 +142,6 @@ class PlanDetailViewModel @Inject constructor(
         timerModel.setTimeLeftInMillis(time)
         _timer.value = time
         initTimer()
-
     }
 
     private fun initTimer() {
@@ -162,7 +158,6 @@ class PlanDetailViewModel @Inject constructor(
             override fun onTimerReset() {
                 _timer.value = timerModel.getTimeLeftInMillis()
             }
-
         }
     }
 
@@ -180,6 +175,10 @@ class PlanDetailViewModel @Inject constructor(
 
     fun resumeTimer() {
         timerModel.resumeTimer()
+    }
+
+    fun getTimerStatus(): Boolean {
+        return timerModel.getTimerStatus()
     }
 
 }

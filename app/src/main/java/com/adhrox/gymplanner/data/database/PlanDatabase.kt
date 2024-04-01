@@ -8,8 +8,7 @@ import com.adhrox.gymplanner.data.database.entities.PlanEntity
 import com.adhrox.gymplanner.data.database.entities.SetEntity
 
 @Database(entities = [PlanEntity::class, SetEntity::class], version = 1)
-abstract class PlanDatabase: RoomDatabase() {
-
+abstract class PlanDatabase : RoomDatabase() {
     abstract fun getPlanDao(): PlanDao
 
     abstract fun getSetDao(): SetDao

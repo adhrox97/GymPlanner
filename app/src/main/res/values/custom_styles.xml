@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="circularStyle">
+    <style name="custom_circular_style">
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="FabShapeStyle1" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="custom_circular_fab_style" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="FabShapeStyle2" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <style name="custom_corners_cut_fab_style" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">30%</item>
         <item name="cornerFamilyTopLeft">cut</item>
         <item name="cornerFamilyTopRight">cut</item>
@@ -16,17 +16,44 @@
         <item name="cornerFamilyBottomRight">cut</item>
     </style>
 
-    <style name="cardViewPlanStyle" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Cut</item>
+    <style name="custom_card_view_plan_style" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/shape_appearance_overlay_card_view_plan_style</item>
     </style>
 
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.Cut" parent="">
+    <style name="shape_appearance_overlay_card_view_plan_style" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">0dp</item>
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="custom_card_view_status_sets_plan_style" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/shape_appearance_overlay_card_view_status_sets_plan_style</item>
+    </style>
+
+
+    <style name="shape_appearance_overlay_card_view_status_sets_plan_style" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">16dp</item>
+    </style>
+
+    <style name="title">
+        <item name="android:fontFamily">@font/bebasneue</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="subtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/anta</item>
+    </style>
+
+    <style name="body" parent="subtitle">
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

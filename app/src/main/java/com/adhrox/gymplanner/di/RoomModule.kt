@@ -17,7 +17,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RoomModule {
-
     private const val PLAN_DATABASE_NAME = "plan_database"
 
     @Singleton
@@ -34,8 +33,7 @@ object RoomModule {
     fun provideSetDao(db: PlanDatabase) = db.getSetDao()
 
     @Provides
-    fun provideRepository(planDao: PlanDao, setDao: SetDao): Repository{
+    fun provideRepository(planDao: PlanDao, setDao: SetDao): Repository {
         return PlanRepository(planDao, setDao)
     }
-
 }

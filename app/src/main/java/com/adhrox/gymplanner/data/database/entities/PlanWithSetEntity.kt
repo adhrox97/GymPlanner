@@ -13,5 +13,8 @@ data class PlanWithSetEntity(
     val sets: List<SetEntity>
 )
 
-fun PlanWithSet.toDataBase() = PlanWithSetEntity(plan = plan.toDataBase(), sets = sets.map { it.toDataBase() })
-fun PlanWithSet.toDataBaseEdit() = PlanWithSetEntity(plan = plan.toDataBaseEdit(), sets = sets.map { it.toDataBase() })
+fun PlanWithSet.toDataBase() =
+    PlanWithSetEntity(plan = plan.toDataBase(), sets = sets.map { it.toDataBase() })
+
+fun PlanWithSet.toDataBaseEdit() =
+    PlanWithSetEntity(plan = plan.toDataBaseEdit(), sets = sets.map { it.toDataBase() })

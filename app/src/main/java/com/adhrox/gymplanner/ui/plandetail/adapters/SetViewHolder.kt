@@ -13,7 +13,7 @@ class SetViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val context = binding.root.context
 
-        if (set.isSelected){
+        if (set.isSelected) {
             binding.root.apply {
                 setBackgroundColor(context.getColor(R.color.green))
                 setImageResource(R.drawable.ic_check)

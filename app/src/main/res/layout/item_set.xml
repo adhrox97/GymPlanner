@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.imageview.ShapeableImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_margin="4dp"
     style="@style/iconStyle"
-    app:shapeAppearanceOverlay="@style/circularStyle"
+    app:shapeAppearanceOverlay="@style/custom_circular_style"
     app:srcCompat="@drawable/ic_check"
     android:background="@color/green">
-
 </com.google.android.material.imageview.ShapeableImageView>

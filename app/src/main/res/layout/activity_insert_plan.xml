@@ -50,11 +50,11 @@
                 android:layout_marginTop="-6dp"
                 android:layout_marginEnd="-6dp"
                 app:srcCompat="@drawable/ic_plus"
-                app:shapeAppearanceOverlay="@style/FabShapeStyle2"
+                app:shapeAppearanceOverlay="@style/custom_corners_cut_fab_style"
                 app:maxImageSize="48dp"
                 app:fabCustomSize="70dp"
                 app:tint="@color/black"
-                android:backgroundTint="#03A9F4"
+                android:backgroundTint="@color/accent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -157,6 +157,37 @@
                     />
 
             </GridLayout>
+
+            <TextView
+                android:id="@+id/tvNotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                style="@style/title"
+                android:text="@string/notes"
+                app:layout_constraintTop_toBottomOf="@id/glInsertInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvNotes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <EditText
+                    android:id="@+id/etNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/body"
+                    android:ems="10"
+                    android:inputType="textMultiLine"
+                    android:focusableInTouchMode="true"/>
+
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

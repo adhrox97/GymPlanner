@@ -5,8 +5,9 @@
         <item name="selectedColor">@color/mystic</item>
         <item name="unselectedColor">@color/bali_hai</item>
         <item name="android:statusBarColor">@color/black</item>
-        <item name="backgroundPrimaryColor">@color/pickled_bluewood</item>
+        <item name="backgroundPrimaryColor">@color/pickled_blue_wood</item>
         <item name="backgroundSecondaryColor">@color/big_stone</item>
+        <item name="tintIconColor">@color/white</item>
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>

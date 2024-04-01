@@ -8,23 +8,23 @@ import com.adhrox.gymplanner.domain.model.Set
 import javax.inject.Inject
 
 class GetPlansUseCase @Inject constructor(private val repository: Repository) {
-    suspend fun getAllPlan(): List<Plan>{
-        return  repository.getAllPlanFromDatabase()
+    suspend fun getAllPlan(): List<Plan> {
+        return repository.getAllPlanFromDatabase()
     }
 
-    suspend fun getAllSets(): List<Set>{
+    suspend fun getAllSets(): List<Set> {
         return repository.getAllSets()
     }
 
-    suspend fun getDataByDay(day: DayModel): List<Plan>{
+    suspend fun getDataByDay(day: DayModel): List<Plan> {
         return repository.getDataByDay(day)
     }
 
-    suspend fun getDataWithSetsByDay(day: DayModel): List<PlanWithSet>{
+    suspend fun getDataWithSetsByDay(day: DayModel): List<PlanWithSet> {
         return repository.getDataWithSetsByDay(day)
     }
 
-    suspend fun geDataById(id: Long): Plan?{
+    suspend fun geDataById(id: Long): Plan? {
         return repository.getDataById(id)
     }
 
