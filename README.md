@@ -13,4 +13,11 @@ Highlighted features:
 - Display of completed sets
 - Works without internet connection
 
-Download GymPlanner now and take your training to the next level!
+<p float="left" align="middle">
+  <img src="/doc/screen4.png" width="245" /> 
+  <img src="/doc/screen2.png" width="245" />
+  <img src="/doc/screen3.png" width="245" />
+</p>
+<p float="left" align="middle">
+  <img src="/doc/screen1.jpeg" width="245" /> 
+</p>
